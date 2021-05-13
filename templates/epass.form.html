@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>e-Pass form to roam</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-sm-3 p-5 shadow">
+    <h1 class="text-center">E-Pass Application</h1>
+    <form action="http://localhost:5000/apply" method="POST">
+        <div class="form-group">
+            <label for="contact_no">Contact no:</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">+91</div>
+                </div>
+                <input type="text" class="form-control" name="contact_no" id="contact_no"
+                    placeholder="Enter your contact number here..." required>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name of the applicant:</label>
+            <input type="text" class="form-control" name="name" id="name"
+                placeholder="Enter name of the applicant here..." required>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="loc1">From district:</label>
+                <select id="loc1" name="loc1" class="form-control" required>
+                    <option value="dummy" selected disabled> ------- </option>
+                    {% for dist in districts: %}
+                    <option value="{{dist}}">{{ dist }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="loc2">To district:</label>
+                <select id="loc2" name="loc2" class="form-control" required>
+                    <option value="dummy" selected disabled> ------- </option>
+                    {% for dist in districts: %}
+                    <option value="{{dist}}">{{ dist }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="service">Type of service:</label>
+            <select id="service" name="service" class="form-control" required>
+                <option value="dummy" selected disabled> ------- </option>
+                {% for sid in services.keys(): %}
+                <option value="{{sid}}">{{ services[sid] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="fromDate">From date:</label>
+                <input type="date" class="form-control" name="fromDate" id="fromDate" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="toDate">till date:</label>
+                <input type="date" class="form-control" name="toDate" id="toDate" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="fromTime">From time:</label>
+                <input type="time" class="form-control" name="fromTime" id="fromTime" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="toTime">To time:</label>
+                <input type="time" class="form-control" name="toTime" id="toTime" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg w-25 btn-primary d-block mx-auto">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
